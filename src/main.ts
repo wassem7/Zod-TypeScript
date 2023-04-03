@@ -1,17 +1,21 @@
 import { z } from 'zod';
 
-const userSchema = z
-  .object({
-    username: z.string(),
-  })
-  // .strict()
-  .passthrough();
+const userMap = z.record(z.string());
+
+const userSchema = z.object({
+  id: z.union([z.string(), z.number()]),
+});
 
 type User = z.infer<typeof userSchema>;
 
-const user = {
-  username: 'wassem',
-  age: 22,
+const user: User = {
+  id: '2',
 };
 
-console.log(userSchema.parse(user));
+const userStore = {
+  kjdkjfdjk: 'Wassem',
+};
+
+console.log(userMap.parse(userStore));
+
+// console.log(userSchema.parse(user));
