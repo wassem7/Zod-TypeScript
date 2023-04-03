@@ -1,16 +1,17 @@
 import { z } from 'zod';
 
-const userSchema = z.object({
-  name: z.string(),
-  age: z.number().gt(20),
-  telnumber: z.number().default(Math.random()),
-  isProgrammer: z.boolean().default(true),
-});
+const userSchema = z
+  .object({
+    username: z.string(),
+  })
+  // .strict()
+  .passthrough();
 
 type User = z.infer<typeof userSchema>;
+
 const user = {
-  name: 'Wassem',
-  age: 21,
-  isProgrammer: true,
+  username: 'wassem',
+  age: 22,
 };
-console.log(userSchema.safeParse(user));
+
+console.log(userSchema.parse(user));
